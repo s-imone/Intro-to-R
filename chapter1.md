@@ -1,20 +1,22 @@
 ---
-title: Template Chapter 1
-description: This is a template chapter.
+title: 'Template Chapter 1'
+description: 'This is a template chapter.'
 ---
 
 ## An exercise title written in sentence case
 
 ```yaml
-type: NormalExercise
+type: NormalExercise 
 lang: r
-xp: 100
+xp: 100 
 skills: 1
-key: 7a27dde1f7
+key: 7a27dde1f7   
 ```
+
 
 This is the assignment text. It should help provide students with the background information needed.
 The instructions that follow should be in bullet point form with clear guidance for what is expected.
+
 
 `@instructions`
 - Instruction 1
@@ -34,6 +36,7 @@ The instructions that follow should be in bullet point form with clear guidance 
 # Load datasets and packages here.
 ```
 
+
 `@sample_code`
 
 ```{r}
@@ -48,6 +51,7 @@ The instructions that follow should be in bullet point form with clear guidance 
 # of 16 lines.
 ```
 
+
 `@solution`
 
 ```{r}
@@ -57,9 +61,12 @@ The instructions that follow should be in bullet point form with clear guidance 
 # to given.
 ```
 
+
 `@sct`
 
 ```{r}
 # Update this to something more informative.
 success_msg("Some praise! Then reinforce a learning objective from the exercise.")
 ```
+
+
