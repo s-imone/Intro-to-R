@@ -1,4 +1,4 @@
 title: Intro to R
-description: Let's learn some basic data manipulation with `data.table` and draw some maps!
+description: Let's learn some basic data manipulation with `data.table` and draw some maps
 programming_language: r
 from: 'r-base-prod:v1.0.1'
