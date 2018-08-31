@@ -1,9 +1,9 @@
 ---
-title: 'Template Chapter 1'
-description: 'This is a template chapter.'
+title: 'Load your first `data.table`'
+description: 'In this section we will explore our crime data. We'll apply a few useful functionalities from `data.table`. We'll also try to derive some basic summary stats using `data.table`'s power. Hold on to your hat! `crime.dt` is our basic data. Let's find out what it's about. We'll be using libraries `data.table` and `zoo`. They have been pre-loaded to your environment.'
 ---
 
-## An exercise title written in sentence case
+## Basic data cleaning
 
 ```yaml
 type: NormalExercise 
@@ -14,8 +14,7 @@ key: 7a27dde1f7
 ```
 
 
-This is the assignment text. It should help provide students with the background information needed.
-The instructions that follow should be in bullet point form with clear guidance for what is expected.
+The data should already be in a nice enough format. Print the first and the last rows to screen by typing `crime.dt` in your console if you don't trust me! What's not very nice about it is the column names are in upper case letters - that's annoying! -, and the dates are not actual date objects. Fortunately, `data.table` and `zoo` have some nice functions that allow us to deal with these issues very quickly. Let's use the `setnames()` and `tolower()` to change the column names to lower case. Type `?setnames()` and `tolowr()` to take a look at the documentation for these functions.
 
 
 `@instructions`
