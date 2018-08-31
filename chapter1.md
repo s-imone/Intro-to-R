@@ -40,25 +40,22 @@ crime.dt <- get(load("Intro-to-R/datasets/crime_dt_wide.rda"))
 `@sample_code`
 
 ```{r}
-# Your
-# sample
-# code
-# should
-# be
-# ideally
-# 10 lines or less,
-# with a max
-# of 16 lines.
+# Set column names to lower case
+# ...
+# Create a month of the year column
+# ...
+# Create a year column
+# ...
 ```
 
 
 `@solution`
 
 ```{r}
-# Answer goes here
-# Make sure to match the comments with your sample code
-# to help students see the differences from solution
-# to given.
+setnames(crime.dt, old = names(crime.dt), new = tolower(names(crime.dt)))
+
+crime.dt[, month := month(year.month)]
+crime.dt[, year := year(year.month)]
 ```
 
 
