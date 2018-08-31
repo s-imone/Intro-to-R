@@ -6,7 +6,8 @@ description: 'In this section we will explore our crime data. We'll apply a few 
 ## Basic data cleaning
 
 ```yaml
-type: NormalExercise 
+title: Basic data cleaning with `data.table`
+type: NormalExercise
 lang: r
 xp: 100 
 skills: 1
