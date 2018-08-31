@@ -18,10 +18,9 @@ The data should already be in a nice enough format. Print the first and the last
 
 
 `@instructions`
-- Instruction 1
-- Instruction 2
-- Instruction 3
-- Instruction 4
+- Use `setnames()` and `tolower()` to make your column names lower case.
+- Use `zoo`'s function `month()` to create a column with the month of your date. Call the new column `month`
+- Use `zoo`'s function `year()` to create a column with the year of your date. Call the new column `year`
 
 `@hint`
 - Here is the hint for this setup problem. 
