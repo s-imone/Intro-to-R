@@ -33,7 +33,7 @@ The data should already be in a nice enough format. Print the first and the last
 ```{r}
 library(data.table)
 library(zoo)
-crime.dt <- get(load(url("http://assets.datacamp.com/production/Intro-to-R/crime_dt_wide.rda")))
+crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/fb814fc6f7bf21aade47c3352ebaadfbc5d80985/crime_dt_wide.rda")))
 ```
 
 
