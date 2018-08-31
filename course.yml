@@ -1,5 +1,4 @@
 title: Intro to R
-description: Welcome to FCA Intro to R! In the following sections we're going to learn the basics to plot and manipulate maps in R.
-Since we are at it, we'll also learn some basic stuff about data.table syntax. It's just more fun than dataframes, and also a lot more efficient.
+description: Let's learn some basic data manipulation with `data.table` and draw some maps!
 programming_language: r
 from: 'r-base-prod:v1.0.1'
