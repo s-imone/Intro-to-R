@@ -3,7 +3,7 @@ title: 'Use `data.table` features to summarise your data'
 description: 'In this section we will explore our crime data. We''ll apply a few useful functionalities from `data.table`. We''ll also try to derive some basic summary stats using `data.table`''s power. Hold on to your hat! `crime.dt` is our basic data. Let''s find out what it''s about. We''ll be using libraries `data.table` and `zoo`. They have been pre-loaded to your environment.'
 ---
 
-### Basic data cleaning with `data.table`
+### Basic data exploration with `data.table`
 
 ```yaml
 type: NormalExercise 
