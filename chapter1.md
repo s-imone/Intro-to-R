@@ -63,7 +63,13 @@ crime.dt[, year := year(year.month)]
 
 ```{r}
 # Update this to something more informative.
-success_msg("Some praise! Then reinforce a learning objective from the exercise.")
+all(names(crime.dt)==tolower(names(crime.dt)))
+# test_object("names(crime.dt)", incorrect_msg = "Something is wrong with the column names of `crime.dt`. Make sure they are all lower case!.")
+       
+crime.dt[, class(month)=="integer"]
+crime.dt[, class(year)=="integer"]
+
+success_msg("Well done! Let's try to do something that's actually useful now.")
 ```
 
 
