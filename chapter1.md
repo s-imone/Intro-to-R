@@ -24,15 +24,17 @@ The data should already be in a nice enough format. Print the first and the last
 - Use `zoo`'s function `year()` to create a column with the year of your date. Call the new column `year`
 
 `@hint`
-- Here is the hint for this setup problem. 
-- It should get students 50% of the way to the correct answer.
+- Try typing `?` followed by the name of the function to take a look at the documentation. Have you tried `setnames(crime.dt, old = old_names, new = new_names)`? You might also want to use the function `names()`.
+- Have you tried typing `?data.table` to have a look at basic `data.table` syntax? You probably want to use the `set` operator `:=`.
 - So don't provide the answer, but don't just reiterate the instructions.
 - Typically one hint per instruction is a sensible amount.
 
 `@pre_exercise_code`
 
 ```{r}
-# Load datasets and packages here.
+library(data.table)
+library(zoo)
+rime.dt <- get(load("Intro-to-R/datasets/crime_dt_wide.rda"))
 ```
 
 
