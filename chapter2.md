@@ -1,9 +1,9 @@
 ---
-title: 'Load your first `data.table`'
+title: 'Use `data.table` features to summarise your data'
 description: 'In this section we will explore our crime data. We''ll apply a few useful functionalities from `data.table`. We''ll also try to derive some basic summary stats using `data.table`''s power. Hold on to your hat! `crime.dt` is our basic data. Let''s find out what it''s about. We''ll be using libraries `data.table` and `zoo`. They have been pre-loaded to your environment.'
 ---
 
-## Basic data cleaning with `data.table`
+### Basic data cleaning with `data.table`
 
 ```yaml
 type: NormalExercise 
@@ -13,8 +13,13 @@ skills: 1
 key: 7a27dde1f7   
 ```
 
-Data `crime.dt`, `data.table`, and `zoo` are pre-loaded to your environment. 
+Data `crime.dt`, and libraries `data.table`, and `zoo` are pre-loaded to your environment. Have a look at your data by printing a subset of rows to screen - just type `crime.dt` in your console, that will print out the first and the last 5 rows of your data. If you just want to know  the dimensions of the data, you can type `dim(crime.dt)`. `data.table` has a very concise syntax for obtaining simple statistics, that because each column is an object of its own. [CRAN](https://cran.r-project.org/) has a great [intro to `data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
 
+In this chapter, we'll try to get some summary stats on reported crimes in London. Each row of `crime.dt` corresponds to one reported crime in London. Column `crime.type` reports crime category under which the crime was recorded by the police. Try to type `crime.dt[, table(crime.type)]` in your console to get a breakdown of the data by crime type.
+
+Once you got an understanding of the data structure, let's try to obtain some more detailed tables. Try to create a `table` object of the proportion of crime type by month. Use columns `crime.type` and `year.month`. Use functions `table()` and `prop.table()`. Type `?prop.table` to take a look at the documentation. Be careful when setting `margin`.
+
+Finally, let's try to get the mean and standard deviation of the number of crimes by crime type. Try with functions `mean()` and `sd()`. 
 
 `@instructions`
 - Use `setnames()` and `tolower()` to make your column names lower case.
