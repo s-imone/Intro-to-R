@@ -33,7 +33,7 @@ The data should already be in a nice enough format. Print the first and the last
 ```{r}
 library(data.table)
 library(zoo)
-crime.dt <- get(load("Intro-to-R/datasets/crime_dt_wide.rda"))
+crime.dt <- get(load(paste0(data.dir,"Intro-to-R/datasets/crime_dt_wide.rda")))
 ```
 
 
