@@ -69,7 +69,7 @@ all(names(crime.dt)==tolower(names(crime.dt)))
 crime.dt[, class(month)=="integer"]
 crime.dt[, class(year)=="integer"]
 
-success_msg("Well done! Let's try to do something that's actually useful now.")
+success_msg("Well done! Let's try to have a look at the data now.")
 ```
 
 
