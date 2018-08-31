@@ -18,16 +18,16 @@ install_version("zoo", "1.8-3")
 
 ##### Include datasets in the image
 
-data_dir <- "/usr/local/share/datasets"
+data_dir <- "Intro-to-R/datasets/"
 dir.create(data_dir)
 
 #' @param x Amazon S3 URL of the dataset, as a string. 
-download_data <- function(x) {
-  download.file(
-    x,
-    file.path(data_dir, basename(x))
-  )
-}
+# download_data <- function(x) {
+#   download.file(
+#     x,
+#     file.path(data_dir, basename(x))
+#   )
+# }
 
 # Usage is, e.g.,
 # download_data(
