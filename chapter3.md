@@ -14,7 +14,12 @@ key: 7a27dde1f7
 ```
 
 
-Data `n.crime.month`, and libraries `data.table`, and `zoo` are pre-loaded to your environment. Have a look at your data by printing a subset of rows to screen - just type `crime.dt` in your console, that will print out the first and the last 5 rows of your data. If you just want to know  the dimensions of the data, you can type `dim(crime.dt)`. A `data.table` object is an enhanced `data.frame`. `data.table` has a very concise syntax - you can do a lot more things within the frame of a `data.table` than with a `data.frame`. The general `data.table` syntax is `DT[i, j, by]`, where `i` is the row (the `where` in SQL syntax), `j` refers to columns (`select` in SQL), and `by` is the group (`group by`). If you want more on `data.table`, [CRAN](https://cran.r-project.org/) has a great [intro to it](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html).
+Data `n.crime.month`, and libraries `data.table`, `zoo`, `ggplot2`, and `plotly` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables and modify existing ones in a `data.table` object. For instance, let's consider the following data:
+
+`
+set.seed(1235673528)
+data.table(x = runif(100, 0, 10), y = rnorm(100, 0,1), z = rbinom(100,1,0.1))
+`
 
 In this chapter, we will try to subset rows and columns, and to obtain some simple summary statistics on reported crimes in London. To create a subset of all crimes committed in July 2017, you would type `crime.dt[year.month=="Jul 2017"]`. For all bycicle thefts in April 2017, you would have to type `crime.dt[year.month=="Apr 2017" & crime.type=="Bicycle theft"]`. If you want to select a column from your `data.table`, say `crime.type`, you can either use `crime.dt[,crime.type]`, which will return a vector, or `crime.dt[, list(crime.type)]`, which will return a `data.table`. The latter syntax is equivalent to `crime.dt[,.(crime.type)]` which I will use from now on. If you want to count your data, you can use the function `.N`, which stores the number of observations in the group you selected. Try typing `crime.dt[,.N]`. Then try typing `crime.dt[, .N, by = year.month]`, or `crime.dt[, .N, by = .(year.month, lsoa.name)]`. What's happened there? You just learned how to use `by` and created two new `data.table` objects with counts of reported crimes by month, and by month and lower super output area.
 
