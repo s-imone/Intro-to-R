@@ -13,6 +13,7 @@ skills: 3
 key: 7a27dde1f7   
 ```
 
+
 Data `n.crime.month`, and libraries `data.table`, `zoo`, `ggplot2`, and `plotly` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables or to modify existing ones in a `data.table` object. For instance:
 
 ```{r}
