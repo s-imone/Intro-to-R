@@ -3,7 +3,7 @@ title: 'Use `ggplot` and `plotly` to create nice figures'
 description: 'In this section we will do some preliminary graphical exploration of the crime data.'
 ---
 
-## Basic data exploration with `data.table`
+## Graphs with `ggplot` and `plotly`
 
 ```yaml
 type: NormalExercise 
@@ -13,13 +13,17 @@ skills: 3
 key: 7a27dde1f7   
 ```
 
+Data `n.crime.month`, and libraries `data.table`, `zoo`, `ggplot2`, and `plotly` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables or to modify existing ones in a `data.table` object. For instance:
 
-Data `n.crime.month`, and libraries `data.table`, `zoo`, `ggplot2`, and `plotly` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables and modify existing ones in a `data.table` object. For instance, let's consider the following data:
+```{r}
+set.seed(1246912) # set the seed to make the example reproducible
+my.dt <- data.table(x = runif(101, 0, 10), y = rnorm(101, 0,1), z = rbinom(101,1,0.1)) # create a random data.table
 
-`
-set.seed(1235673528)
-data.table(x = runif(100, 0, 10), y = rnorm(100, 0,1), z = rbinom(100,1,0.1))
-`
+my.dt[z==1, treat := TRUE] # create a new column. value conditional on value of z
+my.dt[z==0, treat := FALSE] # modify existing column
+
+my.dt[, mean.x := mean(x), by = z] # mean of x by z
+```
 
 In this chapter, we will try to subset rows and columns, and to obtain some simple summary statistics on reported crimes in London. To create a subset of all crimes committed in July 2017, you would type `crime.dt[year.month=="Jul 2017"]`. For all bycicle thefts in April 2017, you would have to type `crime.dt[year.month=="Apr 2017" & crime.type=="Bicycle theft"]`. If you want to select a column from your `data.table`, say `crime.type`, you can either use `crime.dt[,crime.type]`, which will return a vector, or `crime.dt[, list(crime.type)]`, which will return a `data.table`. The latter syntax is equivalent to `crime.dt[,.(crime.type)]` which I will use from now on. If you want to count your data, you can use the function `.N`, which stores the number of observations in the group you selected. Try typing `crime.dt[,.N]`. Then try typing `crime.dt[, .N, by = year.month]`, or `crime.dt[, .N, by = .(year.month, lsoa.name)]`. What's happened there? You just learned how to use `by` and created two new `data.table` objects with counts of reported crimes by month, and by month and lower super output area.
 
