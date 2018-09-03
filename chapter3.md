@@ -30,40 +30,40 @@ my.dt
 
 In this chapter, we will start by doing some data manipulation in order to produce basic figures. First, we will create a new column in `n.crime.month` with the proportion of crime types by month. Let's call it `crime.pct`.
 
-Once we have proportions of crime types over all reported crimes, let's put thos proportions in a graph, to have a look at how they have varied over the course of 2017. To do that we'll use `ggplot2` and `plotly`. If you want to dive deeper into `ggplot`, have a look at [this](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html). For `plotly`, you can start from [here](https://plot.ly/r/#fundamentals).
+Once we have proportions of crime types over all reported crimes, let's put those proportions in a graph, to have a look at how they have varied over the course of 2017. To do that we'll use first `ggplot2`, then `plotly`. If you want to dive deeper into `ggplot`, have a look at [this](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html). For `plotly`, you can start from [here](https://plot.ly/r/#fundamentals).
 
-For now, we'll just plot a couple of line graphs to give you a taste of how cool and flexible these libraries are. But keep in mind that we are barely scratching the surface.Let's have a look at the following example:
+For now, we'll just plot a couple of line graphs to give you a taste of how cool and flexible these libraries are. But keep in mind that we are barely scratching the surface. Let's have a look at the following example:
 
 ```{r}
+set.seed(124433)
+# add a date column to the data
 my.dt[, month := sample(seq(as.Date('2017/01/01'), as.Date('2017/12/01'), by="month"), 120, replace = TRUE)]
+my.dt <- my.dt[order(month)] # order the data for plotly graph
 
 my.dt[, mean.x.month := mean(x), by = month]
 
 library(ggplot2)
-
+library(plotly)
 # basic line graph
 ggplot(data = my.dt) +
   geom_line(aes(x = month, y = mean.x.month))
 
+plot_ly(data = my.dt, x = ~month, y = ~mean.x.month, mode = 'lines')
+
+# compute average by treat
 my.dt[, mean.x.month.treat := mean(x), by = .(month, treat)]
 
-ggplot(data = my.dt) +
-  geom_line(aes(x = month, y = mean.x.month.treat, color = treat))
+# plot by group - you can also assign plots to objects to add layers to it at a later stage
+plot1 <- ggplot(data = my.dt) +
+  geom_line(aes(x = month, y = mean.x.month.treat, color = treat)) # we'll have two lines. One for each group
+
+plot2 <- plot_ly(data = my.dt, x = ~month, y = ~mean.x.month.treat, color = ~treat, mode = 'lines')
 ```
 
-to obtain try to subset rows and columns, and to obtain some simple summary statistics on reported crimes in London. To create a subset of all crimes committed in July 2017, you would type `crime.dt[year.month=="Jul 2017"]`. For all bycicle thefts in April 2017, you would have to type `crime.dt[year.month=="Apr 2017" & crime.type=="Bicycle theft"]`. If you want to select a column from your `data.table`, say `crime.type`, you can either use `crime.dt[,crime.type]`, which will return a vector, or `crime.dt[, list(crime.type)]`, which will return a `data.table`. The latter syntax is equivalent to `crime.dt[,.(crime.type)]` which I will use from now on. If you want to count your data, you can use the function `.N`, which stores the number of observations in the group you selected. Try typing `crime.dt[,.N]`. Then try typing `crime.dt[, .N, by = year.month]`, or `crime.dt[, .N, by = .(year.month, lsoa.name)]`. What's happened there? You just learned how to use `by` and created two new `data.table` objects with counts of reported crimes by month, and by month and lower super output area.
-
-Each row of `crime.dt` corresponds to one reported crime in London. Column `crime.type` reports the crime category under which the crime was recorded by the police. Try to type `crime.dt[, table(crime.type)]` in your console to get counts of crime types in the data.
-
-Once you got an understanding of the data structure, let's try to obtain some more detailed tables. Try to create a `table` object of the proportion of crime type by month. Use columns `crime.type` and `year.month`. Assign the table to an object named `my.prop.table`. Use functions `table()` and `prop.table()`. Type `?prop.table` to take a look at the documentation, and be careful when setting `margin`.
-
-Finally, using `.N` and `by` let's create a `data.table` object with counts of reported crimes by `year.month` and `crime.type`. Assign the object to a `data.table` and name it `n.crime.month`. Then use functions `mean()` and `sd()` to get a `data.table` showing average counts and standard deviations of crime types across months. Name it `my.sum.stats`.
-
-
 `@instructions`
-- Create a `table` of proportions of crime type by month. Assign the table to an object named `my.prop.table`
-- Create a `data.table` of counts of reported crimes by `year.month` and `crime.type`. Name it `n.crime.month`
-- Create a `data.table` of average and standard deviation of crime type counts across months. Name it `my.sum.stats`
+- Create a column in `n.crime.month` with the proportion of crime types by month. Name it `crime.pct`
+- Use `ggplot` to create a line plot of `crime.pct` by `month`. Name it `plot1`. Remember that `crime.pct` was computed by crime type
+- Now use `plotly` to create the same graph. Name it `plot2`
 
 `@hint`
 - Have you noticed that `prop.table()` takes a `table` object as argument? Have you set the right `margin` for your proportional table?
@@ -75,6 +75,8 @@ Finally, using `.N` and `by` let's create a `data.table` object with counts of r
 ```{r}
 library(data.table)
 library(zoo)
+library(ggplot2)
+library(plotly)
 crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/fb814fc6f7bf21aade47c3352ebaadfbc5d80985/crime_dt_wide_1.rda")))
 ```
 
