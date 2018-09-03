@@ -18,15 +18,40 @@ Data `n.crime.month`, and libraries `data.table`, `zoo`, `ggplot2`, and `plotly`
 
 ```{r}
 set.seed(1246912) # set the seed to make the example reproducible
-my.dt <- data.table(x = runif(101, 0, 10), y = rnorm(101, 0,1), z = rbinom(101,1,0.1)) # create a random data.table
+my.dt <- data.table(x = runif(120, 0, 10), y = rnorm(120, 0,1), z = rbinom(120,1,0.25)) # create a random data.table
 
 my.dt[z==1, treat := TRUE] # create a new column. value conditional on value of z
 my.dt[z==0, treat := FALSE] # modify existing column
 
 my.dt[, mean.x := mean(x), by = z] # mean of x by z
+
+my.dt
 ```
 
-In this chapter, we will try to subset rows and columns, and to obtain some simple summary statistics on reported crimes in London. To create a subset of all crimes committed in July 2017, you would type `crime.dt[year.month=="Jul 2017"]`. For all bycicle thefts in April 2017, you would have to type `crime.dt[year.month=="Apr 2017" & crime.type=="Bicycle theft"]`. If you want to select a column from your `data.table`, say `crime.type`, you can either use `crime.dt[,crime.type]`, which will return a vector, or `crime.dt[, list(crime.type)]`, which will return a `data.table`. The latter syntax is equivalent to `crime.dt[,.(crime.type)]` which I will use from now on. If you want to count your data, you can use the function `.N`, which stores the number of observations in the group you selected. Try typing `crime.dt[,.N]`. Then try typing `crime.dt[, .N, by = year.month]`, or `crime.dt[, .N, by = .(year.month, lsoa.name)]`. What's happened there? You just learned how to use `by` and created two new `data.table` objects with counts of reported crimes by month, and by month and lower super output area.
+In this chapter, we will start by doing some data manipulation in order to produce basic figures. First, we will create a new column in `n.crime.month` with the proportion of crime types by month. Let's call it `crime.pct`.
+
+Once we have proportions of crime types over all reported crimes, let's put thos proportions in a graph, to have a look at how they have varied over the course of 2017. To do that we'll use `ggplot2` and `plotly`. If you want to dive deeper into `ggplot`, have a look at [this](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html). For `plotly`, you can start from [here](https://plot.ly/r/#fundamentals).
+
+For now, we'll just plot a couple of line graphs to give you a taste of how cool and flexible these libraries are. But keep in mind that we are barely scratching the surface.Let's have a look at the following example:
+
+```{r}
+my.dt[, month := sample(seq(as.Date('2017/01/01'), as.Date('2017/12/01'), by="month"), 120, replace = TRUE)]
+
+my.dt[, mean.x.month := mean(x), by = month]
+
+library(ggplot2)
+
+# basic line graph
+ggplot(data = my.dt) +
+  geom_line(aes(x = month, y = mean.x.month))
+
+my.dt[, mean.x.month.treat := mean(x), by = .(month, treat)]
+
+ggplot(data = my.dt) +
+  geom_line(aes(x = month, y = mean.x.month.treat, color = treat))
+```
+
+to obtain try to subset rows and columns, and to obtain some simple summary statistics on reported crimes in London. To create a subset of all crimes committed in July 2017, you would type `crime.dt[year.month=="Jul 2017"]`. For all bycicle thefts in April 2017, you would have to type `crime.dt[year.month=="Apr 2017" & crime.type=="Bicycle theft"]`. If you want to select a column from your `data.table`, say `crime.type`, you can either use `crime.dt[,crime.type]`, which will return a vector, or `crime.dt[, list(crime.type)]`, which will return a `data.table`. The latter syntax is equivalent to `crime.dt[,.(crime.type)]` which I will use from now on. If you want to count your data, you can use the function `.N`, which stores the number of observations in the group you selected. Try typing `crime.dt[,.N]`. Then try typing `crime.dt[, .N, by = year.month]`, or `crime.dt[, .N, by = .(year.month, lsoa.name)]`. What's happened there? You just learned how to use `by` and created two new `data.table` objects with counts of reported crimes by month, and by month and lower super output area.
 
 Each row of `crime.dt` corresponds to one reported crime in London. Column `crime.type` reports the crime category under which the crime was recorded by the police. Try to type `crime.dt[, table(crime.type)]` in your console to get counts of crime types in the data.
 
