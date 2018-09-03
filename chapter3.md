@@ -61,6 +61,7 @@ new.dt <- data.table(foo = sample(1:5, size = 100, prob = runif(5, min = 0, max 
 plot2 <- ggplot(data = new.dt) + geom_bar(aes(x = foo))
 ```
 
+
 `@instructions`
 - Create a column in `n.crime.month` with the proportion of crime types by month. Name it `crime.pct`
 - Use `ggplot` to create a line plot of `crime.pct` by `month`. Name it `plot1`. Remember that `crime.pct` was computed by crime type
@@ -69,7 +70,7 @@ plot2 <- ggplot(data = new.dt) + geom_bar(aes(x = foo))
 `@hint`
 - Have you divided `N` by the sum of `N` by `month`?
 - Have you assigned your plot to an object? Have you used the `geom_line()` function?
-- 
+-
 
 `@pre_exercise_code`
 
@@ -103,7 +104,6 @@ plot1 <- ggplot(data = n.crime.month) +
 
 plot2 <- ggplot(data = crime.dt[crime.type=="Bicycle theft"]) +
   geom_bar(aes(x = year.month))
-
 ```
 
 
