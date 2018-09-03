@@ -78,3 +78,5 @@ sum(duplicated(my.sum.stats[,.(crime.type)]))==0 & all(dim(my.sum.stats)==c(14,3
 
 success_msg("Well done! Let's put some of this very important information in some graph now.")
 ```
+
+
