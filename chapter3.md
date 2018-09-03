@@ -66,9 +66,9 @@ plot2 <- plot_ly(data = my.dt, x = ~month, y = ~mean.x.month.treat, color = ~tre
 - Now use `plotly` to create the same graph. Name it `plot2`
 
 `@hint`
-- Have you noticed that `prop.table()` takes a `table` object as argument? Have you set the right `margin` for your proportional table?
-- Arguments of `by` must be a list. Use `list()` or `.()`
-- To create a `data.table`, try wrapping your functions in `.()`
+- Have you divided `N` by the sum of `N` by `month`?
+- Have you assigned your plot to an object? Have you used the `geom_line()` function?
+- 
 
 `@pre_exercise_code`
 
