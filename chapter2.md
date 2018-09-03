@@ -24,6 +24,7 @@ Once you got an understanding of the data structure, let's try to obtain some mo
 
 Finally, using `.N` and `by` let's create a `data.table` object with counts of reported crimes by `year.month` and `crime.type`. Assign the object to a `data.table` and name it `n.crime.month`. Then use functions `mean()` and `sd()` to get a `data.table` showing average counts and standard deviations of crime types across months. Name it `my.sum.stats`.
 
+
 `@instructions`
 - Create a `table` of proportions of crime type by month. Assign the table to an object named `my.prop.table`
 - Create a `data.table` of counts of reported crimes by `year.month` and `crime.type`. Name it `n.crime.month`
