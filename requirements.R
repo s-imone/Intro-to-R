@@ -5,7 +5,7 @@ library(remotes)
 install_version("ggplot2", "3.0.0")
 install_version("data.table", "1.11.4")
 install_version("zoo", "1.8-3")
-# install_version("purrr", "0.2.5")
+install_version("plotly", "	4.8.0")
 
 ##### Install packages in development from GitHub #####
 
