@@ -14,7 +14,7 @@ key: 7a27dde1f7
 ```
 
 
-Data `n.crime.month`, and libraries `data.table`, `zoo`, `ggplot2`, and `plotly` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables or to modify existing ones in a `data.table` object. For instance:
+Data `n.crime.month`, and libraries `data.table`, `zoo`, and `ggplot2` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables or to modify existing ones in a `data.table` object. For instance:
 
 ```{r}
 set.seed(1246912) # set the seed to make the example reproducible
@@ -30,9 +30,9 @@ my.dt
 
 In this chapter, we will start by doing some data manipulation in order to produce basic figures. First, we will create a new column in `n.crime.month` with the proportion of crime types by month. Let's call it `crime.pct`.
 
-Once we have proportions of crime types over all reported crimes, let's put those proportions in a graph, to have a look at how they have varied over the course of 2017. To do that we'll use first `ggplot2`, then `plotly`. If you want to dive deeper into `ggplot`, have a look at [this](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html). For `plotly`, you can start from [here](https://plot.ly/r/#fundamentals).
+Once we have proportions of crime types over all reported crimes, let's put those proportions in a graph, to have a look at how they have varied over the course of 2017. To do that we'll use the `ggplot2` library. If you want to dive deeper into `ggplot`, have a look at [this](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html).
 
-For now, we'll just plot a couple of line graphs to give you a taste of how cool and flexible these libraries are. But keep in mind that we are barely scratching the surface. Let's have a look at the following example:
+For now, we'll just plot a line and a bar graph to give you a taste of how cool and flexible `ggplot` is. But keep in mind that we are barely scratching the surface. Let's have a look at the following example:
 
 ```{r}
 set.seed(124433)
@@ -48,8 +48,6 @@ library(plotly)
 ggplot(data = my.dt) +
   geom_line(aes(x = month, y = mean.x.month))
 
-plot_ly(data = my.dt, x = ~month, y = ~mean.x.month, mode = 'lines')
-
 # compute average by treat
 my.dt[, mean.x.month.treat := mean(x), by = .(month, treat)]
 
@@ -57,7 +55,10 @@ my.dt[, mean.x.month.treat := mean(x), by = .(month, treat)]
 plot1 <- ggplot(data = my.dt) +
   geom_line(aes(x = month, y = mean.x.month.treat, color = treat)) # we'll have two lines. One for each group
 
-plot2 <- plot_ly(data = my.dt, x = ~month, y = ~mean.x.month.treat, color = ~treat, mode = 'lines')
+# Now the simplest of bar graphs
+set.seed(1237834)
+new.dt <- data.table(foo = sample(1:5, size = 100, prob = runif(5, min = 0, max = 1), replace = TRUE))
+plot2 <- ggplot(data = new.dt) + geom_bar(aes(x = foo))
 ```
 
 `@instructions`
@@ -76,7 +77,6 @@ plot2 <- plot_ly(data = my.dt, x = ~month, y = ~mean.x.month.treat, color = ~tre
 library(data.table)
 library(zoo)
 library(ggplot2)
-library(plotly)
 n.crime.month <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/a74a89c152247ab14d23fb87d255f0b022542c59/n_crime_month.rda")))
 ```
 
@@ -84,11 +84,11 @@ n.crime.month <- get(load(url("https://assets.datacamp.com/production/repositori
 `@sample_code`
 
 ```{r}
-# Create a table of proportions of crime types by month
+# Create a column with the proportion of crime types by month. Name it crime.pct
 # ...
-# Create a month of the year column
+# Use ggplot to create a line plot of crime.pct by month. Name it plot1
 # ...
-# Create a year column
+# Use ggplot to create a bar plot of the number of bicycle thefts by month. Name it plot2
 # ...
 ```
 
@@ -96,24 +96,29 @@ n.crime.month <- get(load(url("https://assets.datacamp.com/production/repositori
 `@solution`
 
 ```{r}
-my.prop.table <- crime.dt[, prop.table(table(crime.type, year.month), margin = 2)]
+n.crime.month[, crime.pct := N/sum(N), by = year.month]
 
-n.crime.month <- crime.dt[,.N,by=.(year.month, crime.type)]
+plot1 <- ggplot(data = n.crime.month) +
+  geom_line(aes(x = year.month, y = crime.pct, color = crime.type))
 
-my.sum.stats <- n.crime.month[,.(mean(N), sd(N)), by = crime.type]
+plot2 <- ggplot(data = crime.dt[crime.type=="Bicycle theft"]) +
+  geom_bar(aes(x = year.month))
+
 ```
 
 
 `@sct`
 
 ```{r}
-all(colSums(my.prop.table)==1)
+all(n.crime.month[, sum(crime.pct)==1, by = year.month][,V1]==1)
 
-sum(duplicated(n.crime.month[,.(year.month, crime.type)]))==0 & all(dim(n.crime.month)==c(168,3))
-       
-sum(duplicated(my.sum.stats[,.(crime.type)]))==0 & all(dim(my.sum.stats)==c(14,3))
+plot1$labels[1]=="year.month"
+plot1$labels[2]=="crime.pct"
+plot1$labels[3]=="crime.type"
 
-success_msg("Well done! Let's put some of this very important information in some graph now.")
+plot2$label[1]=="year.month"
+plot2$label[2]=="count"
+plot2$label[3]=="weight"
 ```
 
 
