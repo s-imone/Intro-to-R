@@ -3,8 +3,7 @@ title: 'Use `ggplot` and `plotly` to create nice figures'
 description: 'In this section we will do some preliminary graphical exploration of the crime data.'
 ---
 
-## Graphs with `ggplot` and `plotly`
-
+## Graphs with `ggplot`
 ```yaml
 type: NormalExercise 
 lang: r
@@ -14,7 +13,7 @@ key: 7a27dde1f7
 ```
 
 
-Data `n.crime.month`, and libraries `data.table`, `zoo`, and `ggplot2` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables or to modify existing ones in a `data.table` object. For instance:
+Datasets `crime.dt` and `n.crime.month`, and libraries `data.table`, `zoo`, and `ggplot2` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables or to modify existing ones in a `data.table` object. For instance:
 
 ```{r}
 set.seed(1246912) # set the seed to make the example reproducible
@@ -30,9 +29,9 @@ my.dt
 
 In this chapter, we will start by doing some data manipulation in order to produce basic figures. First, we will create a new column in `n.crime.month` with the proportion of crime types by month. Let's call it `crime.pct`.
 
-Once we have proportions of crime types over all reported crimes, let's put those proportions in a graph, to have a look at how they have varied over the course of 2017. To do that we'll use the `ggplot2` library. If you want to dive deeper into `ggplot`, have a look at [this](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html).
+Once we have proportions of crime types over all reported crimes, let's put those proportions in a graph, to have a look at how they have varied over the course of 2017. Finally, let's use a bar graph to see how bicycle thefts are distributed by month. To derive these graphs we'll use the `ggplot2` library. If you want to dive deeper into `ggplot`, have a look at [this](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html).
 
-For now, we'll just plot a line and a bar graph to give you a taste of how cool and flexible `ggplot` is. But keep in mind that we are barely scratching the surface. Let's have a look at the following example:
+For now, we'll just plot a line and a bar graph to give you a taste of how cool and flexible `ggplot` is. But keep in mind that we are barely scratching the surface. Let's have a look at the following example to get a sense of how `ggplot` works:
 
 ```{r}
 set.seed(124433)
@@ -43,7 +42,6 @@ my.dt <- my.dt[order(month)] # order the data for plotly graph
 my.dt[, mean.x.month := mean(x), by = month]
 
 library(ggplot2)
-library(plotly)
 # basic line graph
 ggplot(data = my.dt) +
   geom_line(aes(x = month, y = mean.x.month))
@@ -65,12 +63,12 @@ plot2 <- ggplot(data = new.dt) + geom_bar(aes(x = foo))
 `@instructions`
 - Create a column in `n.crime.month` with the proportion of crime types by month. Name it `crime.pct`
 - Use `ggplot` to create a line plot of `crime.pct` by `month`. Name it `plot1`. Remember that `crime.pct` was computed by crime type
-- Now use `plotly` to create the same graph. Name it `plot2`
+- Using `crime.dt`, use `ggplot` to create a bar graph of bicycle thefts by month. Name it `plot2`. Remember to subset your data.
 
 `@hint`
 - Have you divided `N` by the sum of `N` by `month`?
 - Have you assigned your plot to an object? Have you used the `geom_line()` function?
--
+- Did you try subsetting your data? Try passing `crime.dt[crime.type=="Bicycle theft"]` as `data` argument for your plot.
 
 `@pre_exercise_code`
 
@@ -78,6 +76,7 @@ plot2 <- ggplot(data = new.dt) + geom_bar(aes(x = foo))
 library(data.table)
 library(zoo)
 library(ggplot2)
+crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/f419d934cee09d6d378e34767c8e93c0961563a4/crime_dt_wide_1.rda")))
 n.crime.month <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/a74a89c152247ab14d23fb87d255f0b022542c59/n_crime_month.rda")))
 ```
 
