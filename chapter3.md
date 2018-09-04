@@ -4,6 +4,7 @@ description: 'In this section we will do some preliminary graphical exploration 
 ---
 
 ## Graphs with `ggplot`
+
 ```yaml
 type: NormalExercise 
 lang: r
