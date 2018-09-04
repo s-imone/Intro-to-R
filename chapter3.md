@@ -10,7 +10,7 @@ type: NormalExercise
 lang: r
 xp: 100 
 skills: 3
-key: 7a27dde1f7   
+key: uISKeFTl5s   
 ```
 
 
