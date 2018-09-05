@@ -27,12 +27,12 @@ library(data.table)
 library(zoo)
 library(ggplot2)
 library(rgdal)
+library(rgeos)
 
 lnd <- readOGR("https://assets.datacamp.com/production/repositories/3473/datasets/ca1f9d22d318a9016987edb655f15bdde124f0fc/london_sport.shp", "london_sport")
 proj4string(lnd) <- CRS("+init=epsg:27700")
 london <- spTransform(lnd, CRS("+init=epsg:4326")) # extracts info from the .shp file - right?
-crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/f419d934cee09d6d378e34767c8e93c0961563a4/crime_dt_wide_1.rda")))
-n.crime.month <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/a74a89c152247ab14d23fb87d255f0b022542c59/n_crime_month.rda")))
+crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/6a71e8d051656a611adf39c33fe106eb3344c1ee/crime_dt_long.rda")))
 ```
 
 `@sample_code`
