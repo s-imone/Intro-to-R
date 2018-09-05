@@ -22,7 +22,6 @@ By typing `class(london)` you can see it is a `SpatialPolygonsDataFrame` object.
 
 
 `@pre_exercise_code`
-
 ```{r}
 library(data.table)
 library(zoo)
@@ -36,23 +35,17 @@ crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/34
 n.crime.month <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/a74a89c152247ab14d23fb87d255f0b022542c59/n_crime_month.rda")))
 ```
 
-
 `@sample_code`
-
 ```{r}
 
 ```
-
 
 `@solution`
-
 ```{r}
 
 ```
 
-
 `@sct`
-
 ```{r}
 
 ```
