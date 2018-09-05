@@ -11,7 +11,11 @@ xp: 100
 key: 0180c62511   
 ```
 
-Dataset `crime.dt` and libraries `data.table`, `zoo`, `ggplot2`, and `rgdal` are pre-loaded to your environment. `rgdal` allows us to work with geospatial data, `ggplot2` is flexible enough to allow us to plot maps. `crime.dt` includes columns with longitude and latitude of the reported crime. In this chapter we will learn how to project the reported crimes on a map of London. To do that we are missing one thing: a file to draw the map of London. That is `london`, already loaded to your environment. `london` is a shapefile. A shapefile is a geospatial vector data format for geographic information system (GIS) software that can spatially describe vector features, such as points, lines, and polygons. Have a look at [this](https://en.wikipedia.org/wiki/Shapefile) for more on shapefiles. For now, all you need to know is that a shapefile is actually a collection of files with a common prefix, living in a common environment. The .shp file is the actual feature geometry.     The crucial file that we will use to   and `n.crime.month`, and libraries `data.table`, `zoo`, and `ggplot2` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables or to modify existing ones in a `data.table` object. For instance:
+Dataset `crime.dt` and libraries `data.table`, `zoo`, `ggplot2`, and `rgdal` are pre-loaded to your environment. `rgdal` allows us to work with geospatial data, `ggplot2` is flexible enough to allow us to plot maps. `crime.dt` includes columns with longitude and latitude of the reported crime. In this chapter we will learn how to project the reported crimes on a map of London. To do that we are missing one thing: a file to draw the map of London. That is `london`, already loaded to your environment. `london` is a shapefile. A shapefile is a geospatial vector data format for geographic information system (GIS) software that can spatially describe vector features, such as points, lines, and polygons. Have a look at [this](https://en.wikipedia.org/wiki/Shapefile) for more on shapefiles. For now, all you need to know is that a shapefile is actually a collection of files with a common prefix, living in a common environment. The .shp file is the actual feature geometry. Let's start by having a look at `london`. 
+
+By typing `class(london)` you can see it is a `SpatialPolygonsDataFrame` object. It holds non-geographic attribute data (type `head(london@data)` to take a look at it), coordinates to draw polygons of the geographical areas in the data (try typing `london@polygons`), info on the coordinate reference system (CRS) (`lnd@proj4string`). By simply typing `plot(london)` in your console, you can print your first map. The function `plot()` is smart, and recognises the class of data you are passing through it. 
+
+
 
 ```{r}
 set.seed(1246912) # set the seed to make the example reproducible
@@ -75,7 +79,10 @@ library(data.table)
 library(zoo)
 library(ggplot2)
 library(rgdal)
-london <- readOGR(dsn = paste0(data.dir, "robin_lovelace_git/Creating-maps-in-R-master/data"), layer = "london_sport") # requires rgdal # extracts info from the .shp file - right?
+
+lnd <- readOGR("", "london_sport")
+proj4string(lnd) <- CRS("+init=epsg:27700")
+london <- spTransform(lnd, CRS("+init=epsg:4326")) # extracts info from the .shp file - right?
 crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/f419d934cee09d6d378e34767c8e93c0961563a4/crime_dt_wide_1.rda")))
 n.crime.month <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/a74a89c152247ab14d23fb87d255f0b022542c59/n_crime_month.rda")))
 ```
