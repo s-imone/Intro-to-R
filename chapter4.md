@@ -3,7 +3,7 @@ title: 'Create your first map'
 description: 'In this chapter we''ll go through the basis of creating simple maps'
 ---
 
-## Insert exercise title here
+## Maps!
 
 ```yaml
 type: NormalExercise
@@ -28,7 +28,7 @@ library(zoo)
 library(ggplot2)
 library(rgdal)
 
-lnd <- readOGR("", "london_sport")
+lnd <- readOGR("https://assets.datacamp.com/production/repositories/3473/datasets/ca1f9d22d318a9016987edb655f15bdde124f0fc/london_sport.shp", "london_sport")
 proj4string(lnd) <- CRS("+init=epsg:27700")
 london <- spTransform(lnd, CRS("+init=epsg:4326")) # extracts info from the .shp file - right?
 crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/f419d934cee09d6d378e34767c8e93c0961563a4/crime_dt_wide_1.rda")))
