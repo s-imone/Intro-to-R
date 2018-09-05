@@ -5,7 +5,7 @@ library(remotes)
 install_version("ggplot2", "3.0.0")
 install_version("data.table", "1.11.4")
 install_version("zoo", "1.8-3")
-install_version("rgdal", "1.3-4")
+devtools::install_version("rgdal", "1.3-4")
 
 ##### Install packages in development from GitHub #####
 
