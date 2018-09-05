@@ -13,7 +13,7 @@ skills: 4
 key: qAPXZcsIii
 ```
 
-Dataset `crime.dt` and libraries `data.table`, `zoo`, `ggplot2`, and `rgdal` are pre-loaded to your environment. `rgdal` allows us to work with geo-spatial data, `ggplot2` is flexible enough to allow us to plot maps. `crime.dt` includes columns with longitude and latitude of the reported crime. In this chapter we will learn how to project the reported crimes on a map of London. To do that we are missing one thing: a file to draw the map of London. That is `london`, already loaded to your environment. `london` is a shapefile The crucial file that we will use to   and `n.crime.month`, and libraries `data.table`, `zoo`, and `ggplot2` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables or to modify existing ones in a `data.table` object. For instance:
+Dataset `crime.dt` and libraries `data.table`, `zoo`, `ggplot2`, and `rgdal` are pre-loaded to your environment. `rgdal` allows us to work with geospatial data, `ggplot2` is flexible enough to allow us to plot maps. `crime.dt` includes columns with longitude and latitude of the reported crime. In this chapter we will learn how to project the reported crimes on a map of London. To do that we are missing one thing: a file to draw the map of London. That is `london`, already loaded to your environment. `london` is a shapefile. A shapefile is a geospatial vector data format for geographic information system (GIS) software that can spatially describe vector features, such as points, lines, and polygons. Have a look at [this](https://en.wikipedia.org/wiki/Shapefile) for more on shapefiles. For now, all you need to know is that a shapefile is actually a collection of files with a common prefix, living in a common environment. The .shp file is the actual feature geometry.     The crucial file that we will use to   and `n.crime.month`, and libraries `data.table`, `zoo`, and `ggplot2` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables or to modify existing ones in a `data.table` object. For instance:
 
 ```{r}
 set.seed(1246912) # set the seed to make the example reproducible
@@ -76,6 +76,8 @@ plot2 <- ggplot(data = new.dt) + geom_bar(aes(x = foo))
 library(data.table)
 library(zoo)
 library(ggplot2)
+library(rgdal)
+london <- readOGR(dsn = paste0(data.dir, "robin_lovelace_git/Creating-maps-in-R-master/data"), layer = "london_sport") # requires rgdal # extracts info from the .shp file - right?
 crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/f419d934cee09d6d378e34767c8e93c0961563a4/crime_dt_wide_1.rda")))
 n.crime.month <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/a74a89c152247ab14d23fb87d255f0b022542c59/n_crime_month.rda")))
 ```
