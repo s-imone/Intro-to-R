@@ -20,9 +20,6 @@ In order to use geospatial data from the shapefile that can be plotted using `gg
 Let's take a look at how we can use `ggplot2` to plot a map of London. You can run the following code in your console.
 
 ```{r}
-london.f <- fortify(london) # obtain a data.frame with all polygons vertices
-
-head(london.f) # take a look at the fortified data
 
 map1 <- ggplot(london) +
   geom_polygon(aes(x = long, y = lat, group = group), fill = 'white', colour = 'black')
@@ -31,7 +28,8 @@ map2 <- map1 +
   scale_colour_manual(values = rainbow(14)) + 
   labs(x = 'Longitude', y = 'Latitude', title = 'Map of Greater London with the borough boundaries')
 map2
-'''
+
+```
 
 `@instructions`
 
