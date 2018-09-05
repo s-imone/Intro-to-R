@@ -11,7 +11,7 @@ xp: 100
 key: 0180c62511   
 ```
 
-## Maps!
+## Maps
 
 ```yaml
 type: NormalExercise 
