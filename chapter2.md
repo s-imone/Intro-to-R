@@ -6,13 +6,12 @@ description: 'In this section we will explore our crime data. We''ll apply a few
 ## Basic data exploration with `data.table`
 
 ```yaml
-type: NormalExercise 
+type: NormalExercise
+key: TrRF46JWfP
 lang: r
-xp: 100 
+xp: 100
 skills: 1
-key: TrRF46JWfP   
 ```
-
 
 Data `crime.dt`, and libraries `data.table`, and `zoo` are pre-loaded to your environment. Have a look at your data by printing a subset of rows to screen - just type `crime.dt` in your console, that will print out the first and the last 5 rows of your data. If you just want to know  the dimensions of the data, you can type `dim(crime.dt)`. A `data.table` object is an enhanced `data.frame`. `data.table` has a very concise syntax - you can do a lot more things within the frame of a `data.table` than with a `data.frame`. The general `data.table` syntax is `DT[i, j, by]`, where `i` is the row (the `where` in SQL syntax), `j` refers to columns (`select` in SQL), and `by` is the group (`group by`). If you want more on `data.table`, [CRAN](https://cran.r-project.org/) has a great [intro to it](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html).
 
@@ -23,7 +22,6 @@ Each row of `crime.dt` corresponds to one reported crime in London. Column `crim
 Once you got an understanding of the data structure, let's try to obtain some more detailed tables. Try to create a `table` object of the proportion of crime type by month. Use columns `crime.type` and `year.month`. Assign the table to an object named `my.prop.table`. Use functions `table()` and `prop.table()`. Type `?prop.table` to take a look at the documentation, and be careful when setting `margin`.
 
 Finally, using `.N` and `by` let's create a `data.table` object with counts of reported crimes by `year.month` and `crime.type`. Assign the object to a `data.table` and name it `n.crime.month`. Then use functions `mean()` and `sd()` to get a `data.table` showing average counts and standard deviations of crime types across months. Name it `my.sum.stats`.
-
 
 `@instructions`
 - Create a `table` of proportions of crime type by month. Assign the table to an object named `my.prop.table`
@@ -36,16 +34,13 @@ Finally, using `.N` and `by` let's create a `data.table` object with counts of r
 - To create a `data.table`, try wrapping your functions in `.()`
 
 `@pre_exercise_code`
-
 ```{r}
 library(data.table)
 library(zoo)
 crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/f419d934cee09d6d378e34767c8e93c0961563a4/crime_dt_wide_1.rda)))
 ```
 
-
 `@sample_code`
-
 ```{r}
 # Create a table of proportions of crime types by month
 # ...
@@ -55,9 +50,7 @@ crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/34
 # ...
 ```
 
-
 `@solution`
-
 ```{r}
 my.prop.table <- crime.dt[, prop.table(table(crime.type, year.month), margin = 2)]
 
@@ -66,9 +59,7 @@ n.crime.month <- crime.dt[,.N,by=.(year.month, crime.type)]
 my.sum.stats <- n.crime.month[,.(mean(N), sd(N)), by = crime.type]
 ```
 
-
 `@sct`
-
 ```{r}
 all(colSums(my.prop.table)==1)
 
@@ -78,5 +69,3 @@ sum(duplicated(my.sum.stats[,.(crime.type)]))==0 & all(dim(my.sum.stats)==c(14,3
 
 success_msg("Well done! Let's put some of this very important information in some graph now.")
 ```
-
-

@@ -6,13 +6,12 @@ description: 'In this section we will do some preliminary graphical exploration 
 ## Graphs with `ggplot`
 
 ```yaml
-type: NormalExercise 
+type: NormalExercise
+key: uISKeFTl5s
 lang: r
-xp: 100 
+xp: 100
 skills: 3
-key: uISKeFTl5s   
 ```
-
 
 Datasets `crime.dt` and `n.crime.month`, and libraries `data.table`, `zoo`, and `ggplot2` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables or to modify existing ones in a `data.table` object. For instance:
 
@@ -60,7 +59,6 @@ new.dt <- data.table(foo = sample(1:5, size = 100, prob = runif(5, min = 0, max 
 plot2 <- ggplot(data = new.dt) + geom_bar(aes(x = foo))
 ```
 
-
 `@instructions`
 - Create a column in `n.crime.month` with the proportion of crime types by month. Name it `crime.pct`
 - Use `ggplot` to create a line plot of `crime.pct` by `month`. Name it `plot1`. Remember that `crime.pct` was computed by crime type
@@ -72,7 +70,6 @@ plot2 <- ggplot(data = new.dt) + geom_bar(aes(x = foo))
 - Did you try subsetting your data? Try passing `crime.dt[crime.type=="Bicycle theft"]` as `data` argument for your plot.
 
 `@pre_exercise_code`
-
 ```{r}
 library(data.table)
 library(zoo)
@@ -81,9 +78,7 @@ crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/34
 n.crime.month <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/a74a89c152247ab14d23fb87d255f0b022542c59/n_crime_month.rda")))
 ```
 
-
 `@sample_code`
-
 ```{r}
 # Create a column with the proportion of crime types by month. Name it crime.pct
 # ...
@@ -93,9 +88,7 @@ n.crime.month <- get(load(url("https://assets.datacamp.com/production/repositori
 # ...
 ```
 
-
 `@solution`
-
 ```{r}
 n.crime.month[, crime.pct := N/sum(N), by = year.month]
 
@@ -106,9 +99,7 @@ plot2 <- ggplot(data = crime.dt[crime.type=="Bicycle theft"]) +
   geom_bar(aes(x = year.month))
 ```
 
-
 `@sct`
-
 ```{r}
 all(n.crime.month[, sum(crime.pct)==1, by = year.month][,V1]==1)
 
@@ -120,5 +111,3 @@ plot2$label[1]=="year.month"
 plot2$label[2]=="count"
 plot2$label[3]=="weight"
 ```
-
-

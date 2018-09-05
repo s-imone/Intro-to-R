@@ -6,16 +6,14 @@ description: 'You will load your first `data.table`. You will do some basic data
 ## Basic data cleaning with `data.table`
 
 ```yaml
-type: NormalExercise 
+type: NormalExercise
+key: 7a27dde1f7
 lang: r
-xp: 100 
+xp: 100
 skills: 1
-key: 7a27dde1f7   
 ```
 
-
 The data should already be in a nice enough format. Print the first and the last rows to screen by typing `crime.dt` in your console if you don't trust me! What's not very nice about it is the column names are in upper case letters - that's annoying! -, and the dates are not actual date objects. Fortunately, `data.table` and `zoo` have some nice functions that allow us to deal with these issues very quickly. Let's use the `setnames()` and `tolower()` to change the column names to lower case. Type `?setnames()` and `tolowr()` to take a look at the documentation for these functions.
-
 
 `@instructions`
 - Use `setnames()` and `tolower()` to make your column names lower case.
@@ -29,16 +27,13 @@ The data should already be in a nice enough format. Print the first and the last
 - Typically one hint per instruction is a sensible amount.
 
 `@pre_exercise_code`
-
 ```{r}
 library(data.table)
 library(zoo)
 crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/fb814fc6f7bf21aade47c3352ebaadfbc5d80985/crime_dt_wide.rda")))
 ```
 
-
 `@sample_code`
-
 ```{r}
 # Set column names to lower case
 # ...
@@ -48,9 +43,7 @@ crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/34
 # ...
 ```
 
-
 `@solution`
-
 ```{r}
 setnames(crime.dt, old = names(crime.dt), new = tolower(names(crime.dt)))
 
@@ -58,9 +51,7 @@ crime.dt[, month := month(year.month)]
 crime.dt[, year := year(year.month)]
 ```
 
-
 `@sct`
-
 ```{r}
 # Update this to something more informative.
 all(names(crime.dt)==tolower(names(crime.dt)))
@@ -71,5 +62,3 @@ crime.dt[, class(year)=="integer"]
 
 success_msg("Well done! Let's try to have a look at the data now.")
 ```
-
-
