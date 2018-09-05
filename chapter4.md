@@ -27,7 +27,6 @@ library(data.table)
 library(zoo)
 library(ggplot2)
 library(rgdal)
-library(rgeos)
 
 lnd <- readOGR("https://assets.datacamp.com/production/repositories/3473/datasets/ca1f9d22d318a9016987edb655f15bdde124f0fc/london_sport.shp", "london_sport")
 proj4string(lnd) <- CRS("+init=epsg:27700")
