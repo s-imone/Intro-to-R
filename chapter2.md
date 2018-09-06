@@ -13,9 +13,23 @@ xp: 100
 skills: 1
 ```
 
-Data `crime.dt`, and libraries `data.table`, and `zoo` are pre-loaded to your environment. Have a look at your data by printing a subset of rows to screen - just type `crime.dt` in your console, that will print out the first and the last 5 rows of your data. If you just want to know  the dimensions of the data, you can type `dim(crime.dt)`.
+Data `crime.dt`, and libraries `data.table`, and `zoo` are pre-loaded to your environment. Have a look at your data by printing a subset of rows to screen - just type `crime.dt`. If you just want to know  the dimensions of the data, you can type `dim(crime.dt)`.
 
-In this chapter, we will try to subset rows and columns, and to obtain some simple summary statistics on reported crimes in London. To create a subset of all crimes committed in July 2017, you would type `crime.dt[year.month=="Jul 2017"]`. For all bycicle thefts in April 2017, you would have to type `crime.dt[year.month=="Apr 2017" & crime.type=="Bicycle theft"]`. If you want to select a column from your `data.table`, say `crime.type`, you can either use `crime.dt[,crime.type]`, which will return a vector, or `crime.dt[, list(crime.type)]`, which will return a `data.table`. The latter syntax is equivalent to `crime.dt[,.(crime.type)]` which I will use from now on. If you want to count your data, you can use the function `.N`, which stores the number of observations in the group you selected. Try typing `crime.dt[,.N]`. Then try typing `crime.dt[, .N, by = year.month]`, or `crime.dt[, .N, by = .(year.month, lsoa.name)]`. What's happened there? You just learned how to use `by` and created two new `data.table` objects with counts of reported crimes by month, and by month and lower super output area.
+In this chapter, we will try to subset rows and columns, and to obtain some simple summary statistics on reported crimes in London. To start playing around, you can start by printing the following in your console. 
+
+```{r}
+crime.dt[year.month=="Jul 2017"] # subset of all crimes committed in July 2017
+crime.dt[year.month=="Apr 2017" & crime.type=="Bicycle theft"] # all bycicle thefts in April 2017
+```
+
+If you want to select a column from your `data.table`, say `crime.type`, you can do either one of the following
+```{r}
+crime.dt[,crime.type] # will return a vector
+crime.dt[, list(crime.type)] # will return a data.table, and is equivalent to
+crime.dt[,.(crime.type)] # which I will be using from now on
+```
+
+If you want to count your data, you can use the function `.N`, which stores the number of observations in the group you selected. Try typing `crime.dt[,.N]`. Then try typing `crime.dt[, .N, by = year.month]`, or `crime.dt[, .N, by = .(year.month, lsoa.name)]`. What's happened there? You just learned how to use `by` and created two new `data.table` objects with counts of reported crimes by month, and by month and lower super output area.
 
 Each row of `crime.dt` corresponds to one reported crime in London. Column `crime.type` reports the crime category under which the crime was recorded by the police. Try to type `crime.dt[, table(crime.type)]` in your console to get counts of crime types in the data.
 
