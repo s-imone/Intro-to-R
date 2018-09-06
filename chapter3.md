@@ -101,13 +101,13 @@ plot2 <- ggplot(data = crime.dt[crime.type=="Bicycle theft"]) +
 
 `@sct`
 ```{r}
-all(n.crime.month[, sum(crime.pct)==1, by = year.month][,V1]==1)
+# all(n.crime.month[, sum(crime.pct)==1, by = year.month][,V1]==1)
 
-plot1$labels[1]=="year.month"
-plot1$labels[2]=="crime.pct"
-plot1$labels[3]=="crime.type"
+# plot1$labels[1]=="year.month"
+# plot1$labels[2]=="crime.pct"
+# plot1$labels[3]=="crime.type"
 
-plot2$label[1]=="year.month"
-plot2$label[2]=="count"
-plot2$label[3]=="weight"
+# plot2$label[1]=="year.month"
+# plot2$label[2]=="count"
+# plot2$label[3]=="weight"
 ```
