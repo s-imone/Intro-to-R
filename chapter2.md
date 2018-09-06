@@ -63,9 +63,9 @@ my.sum.stats <- n.crime.month[,list(mean(N), sd(N)), by = crime.type]
 ```{r}
 all(colSums(my.prop.table)==1)
 
-sum(duplicated(n.crime.month[,.(year.month, crime.type)]))==0 & all(dim(n.crime.month)==c(132,3))
+sum(duplicated(n.crime.month[,list(year.month, crime.type)]))==0 & all(dim(n.crime.month)==c(132,3))
        
-sum(duplicated(my.sum.stats[,.(crime.type)]))==0 & all(dim(my.sum.stats)==c(11,3))
+sum(duplicated(my.sum.stats[,list(crime.type)]))==0 & all(dim(my.sum.stats)==c(11,3))
 
 success_msg("Well done! Let's put some of this very important information in some graph now.")
 ```
