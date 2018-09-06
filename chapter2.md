@@ -35,8 +35,8 @@ Finally, using `.N` and `by` let's create a `data.table` object with counts of r
 
 `@pre_exercise_code`
 ```{r}
-# library(data.table)
-# library(zoo)
+library(data.table)
+library(zoo)
 # crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/f419d934cee09d6d378e34767c8e93c0961563a4/crime_dt_wide_1.rda)))
 ```
 
