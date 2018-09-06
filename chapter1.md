@@ -13,7 +13,7 @@ xp: 100
 skills: 1
 ```
 
-The data should already be in a nice enough format. Print the first and the last rows to screen by typing `crime.dt` in your console if you don't trust me! What's not very nice about it is the column names are in upper case letters - that's annoying! -, and the dates are not actual date objects. Fortunately, `data.table` and `zoo` have some nice functions that allow us to deal with these issues very quickly. Let's use the `setnames()` and `tolower()` to change the column names to lower case. Type `?setnames()` and `tolowr()` to take a look at the documentation for these functions.
+The data should already be in a nice enough format. Print the first and the last 5 rows to screen by typing `crime.dt` in your console if you don't trust me! What's not very nice about it is the column names are in upper case letters - that's annoying! -, and the dates are not actual date objects. Fortunately, `data.table` and `zoo` have some nice functions that allow us to deal with these issues very quickly. Let's use the `setnames()` and `tolower()` to change the column names to lower case. Type `?setnames()` and `tolowr()` to take a look at the documentation for these functions.
 
 `@instructions`
 - Use `setnames()` and `tolower()` to make your column names lower case.
