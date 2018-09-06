@@ -23,9 +23,14 @@ For now, we'll just plot a line and a bar graph to give you a taste of how cool 
 
 ```{r}
 set.seed(124433)
+my.dt <- data.table(x = runif(120, 0, 10), y = rnorm(120, 0,1), z = rbinom(120,1,0.25)) # create a random data.table
+
+my.dt[z==1, treat := TRUE] # create a new column. value conditional on value of z
+my.dt[z==0, treat := FALSE] # modify existing column
+
+my.dt[, mean.x := mean(x), by = z] # mean of x by z
 # add a date column to the data
 my.dt[, month := sample(seq(as.Date('2017/01/01'), as.Date('2017/12/01'), by="month"), 120, replace = TRUE)]
-my.dt <- my.dt[order(month)] # order the data for plotly graph
 
 my.dt[, mean.x.month := mean(x), by = month]
 
