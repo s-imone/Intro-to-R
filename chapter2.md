@@ -54,7 +54,7 @@ crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/34
 ```{r}
 my.prop.table <- crime.dt[, prop.table(table(crime.type, year.month), margin = 2)]
 
-n.crime.month <- crime.dt[,.N,by=.(year.month, crime.type)]
+n.crime.month <- crime.dt[,.N,by=list(year.month, crime.type)]
 
 my.sum.stats <- n.crime.month[,.(mean(N), sd(N)), by = crime.type]	
 ```
