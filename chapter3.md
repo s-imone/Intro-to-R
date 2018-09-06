@@ -13,19 +13,7 @@ xp: 100
 skills: 3
 ```
 
-Datasets `crime.dt` and `n.crime.month`, and libraries `data.table`, `zoo`, and `ggplot2` are pre-loaded to your environment. Before starting, let's add another function to our `data.table` stack: `:=` - or assignment by reference. Try to type `?":="` in your console to take a look at the documentation. The `:=` operator allows you to create new variables or to modify existing ones in a `data.table` object. For instance:
-
-```{r}
-set.seed(1246912) # set the seed to make the example reproducible
-my.dt <- data.table(x = runif(120, 0, 10), y = rnorm(120, 0,1), z = rbinom(120,1,0.25)) # create a random data.table
-
-my.dt[z==1, treat := TRUE] # create a new column. value conditional on value of z
-my.dt[z==0, treat := FALSE] # modify existing column
-
-my.dt[, mean.x := mean(x), by = z] # mean of x by z
-
-my.dt
-```
+Datasets `crime.dt` and `n.crime.month`, and libraries `data.table`, `zoo`, and `ggplot2` are pre-loaded to your environment. 
 
 In this chapter, we will start by doing some data manipulation in order to produce basic figures. First, we will create a new column in `n.crime.month` with the proportion of crime types by month. Let's call it `crime.pct`.
 
