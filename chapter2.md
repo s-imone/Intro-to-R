@@ -56,7 +56,7 @@ my.prop.table <- crime.dt[, prop.table(table(crime.type, year.month), margin = 2
 
 n.crime.month <- crime.dt[,.N,by=list(year.month, crime.type)]
 
-my.sum.stats <- n.crime.month[,.(mean(N), sd(N)), by = crime.type]	
+my.sum.stats <- n.crime.month[,list(mean(N), sd(N)), by = crime.type]	
 ```
 
 `@sct`
