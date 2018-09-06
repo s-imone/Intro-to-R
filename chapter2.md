@@ -37,7 +37,7 @@ Finally, using `.N` and `by` let's create a `data.table` object with counts of r
 ```{r}
 library(data.table)
 library(zoo)
-crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/f419d934cee09d6d378e34767c8e93c0961563a4/crime_dt_wide_1.rda)))
+crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/3473/datasets/f419d934cee09d6d378e34767c8e93c0961563a4/crime_dt_wide_1.rda")))
 ```
 
 `@sample_code`
@@ -52,20 +52,20 @@ crime.dt <- get(load(url("https://assets.datacamp.com/production/repositories/34
 
 `@solution`
 ```{r}
-# my.prop.table <- crime.dt[, prop.table(table(crime.type, year.month), margin = 2)]
+my.prop.table <- crime.dt[, prop.table(table(crime.type, year.month), margin = 2)]
 
-# n.crime.month <- crime.dt[,.N,by=.(year.month, crime.type)]
+n.crime.month <- crime.dt[,.N,by=.(year.month, crime.type)]
 
-# my.sum.stats <- n.crime.month[,.(mean(N), sd(N)), by = crime.type]	
+my.sum.stats <- n.crime.month[,.(mean(N), sd(N)), by = crime.type]	
 ```
 
 `@sct`
 ```{r}
-# all(colSums(my.prop.table)==1)
+all(colSums(my.prop.table)==1)
 
-# sum(duplicated(n.crime.month[,.(year.month, crime.type)]))==0 & all(dim(n.crime.month)==c(168,3))
+sum(duplicated(n.crime.month[,.(year.month, crime.type)]))==0 & all(dim(n.crime.month)==c(168,3))
        
-# sum(duplicated(my.sum.stats[,.(crime.type)]))==0 & all(dim(my.sum.stats)==c(14,3))
+sum(duplicated(my.sum.stats[,.(crime.type)]))==0 & all(dim(my.sum.stats)==c(14,3))
 
-# success_msg("Well done! Let's put some of this very important information in some graph now.")
+success_msg("Well done! Let's put some of this very important information in some graph now.")
 ```
