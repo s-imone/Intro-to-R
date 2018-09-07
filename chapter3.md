@@ -3,7 +3,7 @@ title: 'Use ggplot to create nice figures'
 description: 'In this section we will do some preliminary graphical exploration of the crime data.'
 ---
 
-## Graphs with `ggplot`
+## Graphs with ggplot
 
 ```yaml
 type: NormalExercise

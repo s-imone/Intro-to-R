@@ -3,7 +3,7 @@ title: 'Use data.table features to summarise your data'
 description: 'In this section we will explore our crime data. We''ll apply a few useful functionalities from data.table to derive some basic summary stats.'
 ---
 
-## Basic data exploration with `data.table`
+## Basic data exploration with data.table
 
 ```yaml
 type: NormalExercise
