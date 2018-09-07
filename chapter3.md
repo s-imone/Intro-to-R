@@ -1,5 +1,5 @@
 ---
-title: 'Use `ggplot` and `plotly` to create nice figures'
+title: 'Use ggplot to create nice figures'
 description: 'In this section we will do some preliminary graphical exploration of the crime data.'
 ---
 

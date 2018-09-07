@@ -1,6 +1,6 @@
 ---
-title: 'Use `data.table` features to summarise your data'
-description: 'In this section we will explore our crime data. We''ll apply a few useful functionalities from `data.table` to derive some basic summary stats. Hold on to your hat!'
+title: 'Use data.table features to summarise your data'
+description: 'In this section we will explore our crime data. We''ll apply a few useful functionalities from data.table to derive some basic summary stats.'
 ---
 
 ## Basic data exploration with `data.table`
